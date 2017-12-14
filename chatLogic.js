@@ -9,7 +9,7 @@ function sendTextMessage(sender, text) {
     sendMessageDataToSender(sender, messageData);
 }
 
-function sendInitiatingMessage(sender){
+function chooseLanguageMessage(sender){
 	let messageData = {
 	    "attachment":{
 			"type":"template",
@@ -39,6 +39,36 @@ function sendInitiatingMessage(sender){
 	sendMessageDataToSender(sender, messageData);
 }
 
+function chooseCountryMessage(sender){
+	let messageData = {
+	    "attachment":{
+			"type":"template",
+			"payload":{
+				"template_type":"button",
+				"text":"Choose a language",
+				"buttons":[
+				    {
+					  "type": "postback",
+					  "title": "Nederland",
+					  "payload": "country"
+					},
+				    {
+					  "type": "postback",
+					  "title": "België",
+					  "payload": "country"
+					},
+					{
+					  "type": "postback",
+					  "title": "Frankrijk",
+					  "payload": "country"
+					}
+				]
+			}
+		}
+	}
+	sendMessageDataToSender(sender, messageData);
+}
+
 function sendMessageDataToSender(sender, messageData){
 	request({
 	    url,
@@ -60,8 +90,16 @@ function sendMessageDataToSender(sender, messageData){
 module.exports = {
 	main(event, sender){
 		if (event.postback) {
-			if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
-				sendInitiatingMessage(sender);
+			const { payload } = event.postback;
+			switch(payload) {
+			    case 'USER_DEFINED_PAYLOAD':
+			        chooseLanguageMessage(sender);
+			        break;
+			    case 'language':
+			        chooseCountryMessage(sender);
+			        break;
+			    default:
+			        code block
 			}
 		}
 		if (event.message && event.message.text) {
