@@ -1,9 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
+import tokens from './secrets/tokens.json'
 
 const app = express();
 
+const facebookPageToken = process.env.facebookPageToken || tokens.facebookPage;
 app.set('port', (process.env.PORT || 5000));
 
 // Process application/x-www-form-urlencoded
@@ -14,6 +16,7 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', function (req, res) {
+	
 	res.send('Hello world, I am a chat bot')
 })
 
@@ -27,5 +30,20 @@ app.get('/webhook/', function (req, res) {
 
 // Spin up the server
 app.listen(app.get('port'), function() {
+	console.log(facebookPageToken);
 	console.log('running on port', app.get('port'))
+})
+
+
+app.post('/webhook/', function (req, res) {
+    let messaging_events = req.body.entry[0].messaging
+    for (let i = 0; i < messaging_events.length; i++) {
+	    let event = req.body.entry[0].messaging[i]
+	    let sender = event.sender.id
+	    if (event.message && event.message.text) {
+		    let text = event.message.text
+		    sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+	    }
+    }
+    res.sendStatus(200)
 })
