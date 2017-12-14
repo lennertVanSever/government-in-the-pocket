@@ -40,7 +40,7 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
       let event = req.body.entry[0].messaging[i]
       let sender = event.sender.id;
-
+      console.log(event);
       if (event.message && event.message.text) {
   	    let text = event.message.text
   	    if (text === 'Generic') {
@@ -53,6 +53,9 @@ app.post('/webhook/', function (req, res) {
   	    let text = JSON.stringify(event.postback)
   	    sendTextMessage(sender, "Postback received: "+text.substring(0, 200), facebookPageToken)
   	    continue
+      }
+      else{
+      	sendTextMessage("let's begin");
       }
     }
     res.sendStatus(200)
