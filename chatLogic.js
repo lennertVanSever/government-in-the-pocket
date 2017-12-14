@@ -99,7 +99,7 @@ module.exports = {
 			        chooseCountryMessage(sender);
 			        break;
 			    default:
-			        code block
+			        console.log("payload not found", payload);
 			}
 		}
 		if (event.message && event.message.text) {
