@@ -69,6 +69,31 @@ function chooseCountryMessage(sender){
 	sendMessageDataToSender(sender, messageData);
 }
 
+function askInfoOrAction(sender){
+	let messageData = {
+	    "attachment":{
+			"type":"template",
+			"payload":{
+				"template_type":"button",
+				"text":"Welkom bij de Belgische overheid 🇧🇪. Wil je info of een adminstratieve taak uitvoeren?",
+				"buttons":[
+				    {
+					  "type": "postback",
+					  "title": "info",
+					  "payload": "typeOfAction"
+					},
+				    {
+					  "type": "postback",
+					  "title": "adminstratieve taak",
+					  "payload": "typeOfAction"
+					}
+				]
+			}
+		}
+	}
+	sendMessageDataToSender(sender, messageData);
+}
+
 function sendMessageDataToSender(sender, messageData){
 	request({
 	    url,
@@ -97,6 +122,9 @@ module.exports = {
 			        break;
 			    case 'language':
 			        chooseCountryMessage(sender);
+			        break;
+			   	case 'country':
+			        askInfoOrAction(sender);
 			        break;
 			    default:
 			        console.log("payload not found", payload);
