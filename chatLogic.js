@@ -25,10 +25,11 @@ function sendTextMessage(sender, text) {
 module.exports = {
 	main(event, sender){
 		if (event.postback) {
-			console.log(event.postback);
+			if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
+				sendTextMessage(sender, "Hi, please choose your language");
+			}
 		}
 		if (event.message && event.message.text) {
-	  	    let text = event.message.text
 	  	    sendTextMessage(sender, "message received");
 	    }
 	}
