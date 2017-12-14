@@ -45,7 +45,7 @@ function chooseCountryMessage(sender){
 			"type":"template",
 			"payload":{
 				"template_type":"button",
-				"text":"Choose a language",
+				"text":"Kies jouw land",
 				"buttons":[
 				    {
 					  "type": "postback",
