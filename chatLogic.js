@@ -47,12 +47,28 @@ function sendInitiatingMessage(sender){
 		  ]
 		}
     }
+    request({
+	    url,
+	    qs,
+	    method: 'POST',
+		json: {
+		    recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+		    console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+		    console.log('Error 19: ', response.body.error)
+	    }
+    });
 }
 
 module.exports = {
 	main(event, sender){
 		if (event.postback) {
 			if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
+				console.log("initiating message");
 				sendInitiatingMessage(sender);
 			}
 		}
