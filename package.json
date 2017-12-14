@@ -1,0 +1,34 @@
+{
+  "name": "government-in-the-pocket",
+  "version": "1.0.0",
+  "description": "The facebook messenger chatbot for governments",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "nodemon ./index.js --exec babel-node -e js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lennertVanSever/government-in-the-pocket.git"
+  },
+  "author": "Lennert Van Sever",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lennertVanSever/government-in-the-pocket/issues"
+  },
+  "homepage": "https://github.com/lennertVanSever/government-in-the-pocket#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "nodemon": "^1.11.0"
+  }
+}
