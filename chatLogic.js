@@ -1,4 +1,6 @@
 import request from 'request';
+import axios from 'axios';
+
 
 const facebookPageToken = process.env.facebookPageToken;
 const url = 'https://graph.facebook.com/v2.6/me/messages';
@@ -28,7 +30,8 @@ function sendMessageDataToSender(sender, messageData){
 }
 
 function getProfileData(sender){
-	console.log(sender);
+	console.log("sender: ".sender);
+	axios.get(`https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`)
 	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
 }
 function chooseLanguageMessage(sender){
