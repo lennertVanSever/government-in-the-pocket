@@ -27,7 +27,7 @@ function sendMessageDataToSender(sender, messageData){
     });
 }
 
-getProfileData(sender){
+function getProfileData(sender){
 	console.log(sender);
 	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
 }
