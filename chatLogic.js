@@ -6,21 +6,7 @@ const qs = {access_token:facebookPageToken};
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
-    request({
-	    url,
-	    qs,
-	    method: 'POST',
-		json: {
-		    recipient: {id:sender},
-			message: messageData,
-		}
-	}, function(error, response, body) {
-		if (error) {
-		    console.log('Error sending messages: ', error)
-		} else if (response.body.error) {
-		    console.log('Error 21: ', response.body.error)
-	    }
-    })
+    sendMessageDataToSender(sender, messageData);
 }
 
 function sendInitiatingMessage(sender){
@@ -50,7 +36,11 @@ function sendInitiatingMessage(sender){
 			}
 		}
 	}
-    request({
+	sendMessageDataToSender(sender, messageData);
+}
+
+function sendMessageDataToSender(sender, messageData){
+	request({
 	    url,
 	    qs,
 	    method: 'POST',
@@ -71,7 +61,6 @@ module.exports = {
 	main(event, sender){
 		if (event.postback) {
 			if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
-				console.log("initiating message");
 				sendInitiatingMessage(sender);
 			}
 		}
