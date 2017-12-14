@@ -27,6 +27,10 @@ function sendMessageDataToSender(sender, messageData){
     });
 }
 
+getProfileData(sender){
+	console.log(sender);
+	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
+}
 function chooseLanguageMessage(sender){
 	let messageData = {
 	    "attachment":{
@@ -140,6 +144,7 @@ module.exports = {
 			const { payload, title } = event.postback;
 			switch(payload) {
 			    case 'USER_DEFINED_PAYLOAD':
+			    	getProfileData(sender);
 			        chooseLanguageMessage(sender);
 			        break;
 			    case 'language':
