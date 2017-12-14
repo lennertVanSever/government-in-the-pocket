@@ -1,12 +1,14 @@
 import request from 'request';
 
 const facebookPageToken = process.env.facebookPageToken;
+const url = 'https://graph.facebook.com/v2.6/me/messages';
+const qs = {access_token:facebookPageToken};
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
     request({
-	    url: 'https://graph.facebook.com/v2.6/me/messages',
-	    qs: {access_token:facebookPageToken},
+	    url,
+	    qs,
 	    method: 'POST',
 		json: {
 		    recipient: {id:sender},
@@ -19,6 +21,32 @@ function sendTextMessage(sender, text) {
 		    console.log('Error 19: ', response.body.error)
 	    }
     })
+}
+
+function sendInitiatingMessage(sender){
+	let messageData = {
+	    "payload": {
+		  "template_type":"button",
+		  "text":"Choose a language",
+		  "buttons":[
+		    {
+			  "type": "postback",
+			  "title": "English",
+			  "payload": "language"
+			},
+		    {
+			  "type": "postback",
+			  "title": "Nederlands",
+			  "payload": "language"
+			},
+			{
+			  "type": "postback",
+			  "title": "Français",
+			  "payload": "language"
+			}
+		  ]
+		}
+    }
 }
 
 module.exports = {
