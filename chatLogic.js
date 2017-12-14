@@ -18,35 +18,38 @@ function sendTextMessage(sender, text) {
 		if (error) {
 		    console.log('Error sending messages: ', error)
 		} else if (response.body.error) {
-		    console.log('Error 19: ', response.body.error)
+		    console.log('Error 21: ', response.body.error)
 	    }
     })
 }
 
 function sendInitiatingMessage(sender){
 	let messageData = {
-	    "payload": {
-		  "template_type":"button",
-		  "text":"Choose a language",
-		  "buttons":[
-		    {
-			  "type": "postback",
-			  "title": "English",
-			  "payload": "language"
-			},
-		    {
-			  "type": "postback",
-			  "title": "Nederlands",
-			  "payload": "language"
-			},
-			{
-			  "type": "postback",
-			  "title": "Français",
-			  "payload": "language"
+	    "attachment":{
+			"type":"template",
+			"payload":{
+				"template_type":"button",
+				"text":"Choose a language",
+				"buttons":[
+				    {
+					  "type": "postback",
+					  "title": "English",
+					  "payload": "language"
+					},
+				    {
+					  "type": "postback",
+					  "title": "Nederlands",
+					  "payload": "language"
+					},
+					{
+					  "type": "postback",
+					  "title": "Français",
+					  "payload": "language"
+					}
+				]
 			}
-		  ]
 		}
-    }
+	}
     request({
 	    url,
 	    qs,
@@ -59,7 +62,7 @@ function sendInitiatingMessage(sender){
 		if (error) {
 		    console.log('Error sending messages: ', error)
 		} else if (response.body.error) {
-		    console.log('Error 19: ', response.body.error)
+		    console.log('Error 62: ', response.body.error)
 	    }
     });
 }
@@ -77,3 +80,5 @@ module.exports = {
 	    }
 	}
 }
+
+
