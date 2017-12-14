@@ -53,7 +53,7 @@ module.exports = {
 	main(event, sender){
 		if (event.postback) {
 			if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
-				sendTextMessage(sender, "Hi, please choose your language");
+				sendInitiatingMessage(sender);
 			}
 		}
 		if (event.message && event.message.text) {
