@@ -122,7 +122,7 @@ function askLogin(sender){
 				"buttons":[
 				    {
 					  	"type":"web_url",
-					    "url":"https://www.facebook.com",
+					    "url":"https://government-in-the-pocket.herokuapp.com",
 					    "title":"Login bij de Belgische overheid",
 					    "webview_height_ratio": "full",
 					    "messenger_extensions": true,
