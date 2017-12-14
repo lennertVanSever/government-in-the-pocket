@@ -1,11 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
-import tokens from './secrets/tokens.json'
 
 const app = express();
 
-const facebookPageToken = process.env.facebookPageToken || tokens.facebookPage;
+let facebookPageToken = process.env.facebookPageToken;
+
 app.set('port', (process.env.PORT || 5000));
 
 // Process application/x-www-form-urlencoded
