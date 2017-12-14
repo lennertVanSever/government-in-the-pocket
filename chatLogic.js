@@ -26,12 +26,13 @@ function sendMessageDataToSender(sender, messageData){
 		if (error) {
 		    console.log('Error sending messages: ', error)
 		} else if (response.body.error) {
-		    console.log('Error 62: ', response.body.error)
+		    console.log('Error: ', response.body.error)
 	    }
     });
 }
 
 function getProfileData(sender){
+	console.log(sender);
 	axios.get(`https://graph.facebook.com/v2.6/${sender}?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`).then(response => {
 		const {first_name, last_name, profile_pic, id} = response.data;
 		citizens.find({facebook_id: id}).then(citizenData => {
@@ -39,8 +40,7 @@ function getProfileData(sender){
 				citizens.create({first_name, last_name, profile_pic, facebook_id: id});
 			}
 		});
-	})
-	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
+	});
 }
 function chooseLanguageMessage(sender){
 	let messageData = {
