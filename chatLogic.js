@@ -30,8 +30,10 @@ function sendMessageDataToSender(sender, messageData){
 }
 
 function getProfileData(sender){
-	console.log("sender: ".sender);
-	axios.get(`https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`)
+	console.log("sender: ", sender);
+	/*axios.get(`https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`).then(response => {
+		console.log(response)
+	})*/
 	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
 }
 function chooseLanguageMessage(sender){
