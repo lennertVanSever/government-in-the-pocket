@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
+import chatLogic from './chatLogic';
 
 const app = express();
 
@@ -40,27 +41,12 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
       let event = req.body.entry[0].messaging[i]
       let sender = event.sender.id;
-      console.log(event);
-      if (event.message && event.message.text) {
-  	    let text = event.message.text
-  	    if (text === 'Generic') {
-  		    sendGenericMessage(sender)
-  		    continue
-  	    }
-  	    sendTextMessage(sender, "message received");
-      }
-      if (event.postback) {
-  	    let text = JSON.stringify(event.postback)
-  	    sendTextMessage(sender, "Postback received: "+text.substring(0, 200), facebookPageToken)
-  	    continue
-      }
-      else{
-      	sendTextMessage("let's begin");
-      }
+      chatLogic.main(event, sender);
     }
     res.sendStatus(200)
 })
 
+/*
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
     request({
@@ -127,4 +113,4 @@ function sendGenericMessage(sender) {
 		    console.log('Error 123: ', response.body.error)
 	    }
     })
-}
+}*/
