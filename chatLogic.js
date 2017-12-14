@@ -124,7 +124,7 @@ function askLogin(sender){
 					  	"type":"web_url",
 					    "url":"https://government-in-the-pocket.herokuapp.com",
 					    "title":"Login",
-					    "webview_height_ratio": "full",
+					    "webview_height_ratio": "compact",
 					    "messenger_extensions": true,
 					}
 				]
