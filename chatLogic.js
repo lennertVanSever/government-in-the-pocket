@@ -1,6 +1,8 @@
 import request from 'request';
 import axios from 'axios';
 
+import { citizens } from './database/Mongo';
+
 
 const facebookPageToken = process.env.facebookPageToken;
 const url = 'https://graph.facebook.com/v2.6/me/messages';
@@ -30,9 +32,13 @@ function sendMessageDataToSender(sender, messageData){
 }
 
 function getProfileData(sender){
-	console.log("sender: ", sender);
 	axios.get(`https://graph.facebook.com/v2.6/${sender}?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`).then(response => {
-		console.log(response);
+		const {first_name, last_name, profile_pic, id} = response.data;
+		citizens.find({facebook_id: id}).then(citizenData => {
+			if(citizenData.length === 0){
+				citizens.create({first_name, last_name, profile_pic, facebook_id: id});
+			}
+		});
 	})
 	//https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic&access_token=<PAGE_ACCESS_TOKEN>
 }
