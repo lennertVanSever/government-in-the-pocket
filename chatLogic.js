@@ -121,9 +121,11 @@ function askLogin(sender){
 				"text":"Voordat je kan beginnen moet je inloggen zodat we zeker weten dat je echt bent.",
 				"buttons":[
 				    {
-					  "type": "postback",
-					  "title": "Inloggen",
-					  "payload": "typeOfAction"
+					  	"type":"web_url",
+					    "url":"https://www.facebook.com",
+					    "title":"Login bij de Belgische overheid",
+					    "webview_height_ratio": "full",
+					    "messenger_extensions": true,
 					}
 				]
 			}
