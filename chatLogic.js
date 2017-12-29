@@ -133,15 +133,13 @@ function askLogin(sender){
 			"payload":{
 				"template_type":"button",
 				"text":"Voordat je kan beginnen moet je inloggen zodat we zeker weten dat je echt bent.",
-				"buttons":[
-				    {
-					  	"type":"web_url",
-					    "url":"https://government-in-the-pocket.herokuapp.com",
-					    "title":"Login",
-					    "webview_height_ratio": "tall",
-					    "messenger_extensions": true,
-					}
-				]
+				"buttons":[{
+			  	"type":"web_url",
+			    "url":`https://government-client.herokuapp.com/forms/login/${sender}`,
+			    "title":"Login",
+			    "webview_height_ratio": "compact",
+			    "messenger_extensions": true,
+        }]
 			}
 		}
 	}
