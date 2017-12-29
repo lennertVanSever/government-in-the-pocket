@@ -41,6 +41,11 @@ function getProfileData(sender){
     });
   });
 }
+
+function saveLanguage(sender, language){
+  citizens.update({facebook_id: id}, {language});
+}
+
 function chooseLanguageMessage(sender){
   let messageData = {
     "attachment":{
@@ -156,6 +161,7 @@ function handleMessengerWebHookCall(event, sender){
         chooseLanguageMessage(sender);
         break;
       case 'language':
+        saveLanguage(sender, title);
         chooseCountryMessage(sender);
         break;
       case 'country':
