@@ -12,7 +12,7 @@ let facebookPageToken = process.env.facebookPageToken;
 
 app.set('port', (process.env.PORT || 5000));
 
-const whitelist = ['http://localhost:3000'];
+const whitelist = ['http://localhost:3000', 'https://government-client.herokuapp.com'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
