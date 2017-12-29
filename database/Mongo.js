@@ -21,7 +21,7 @@ const citizensSchema = database.Schema({
 	profile_pic: String,
 	facebook_id: Number,
   registration_number: Number,
-	language: ObjectId,
+	language: String,
 	government: ObjectId
 }, { collection: 'citizens' });
 const citizens = database.model('citizens', citizensSchema);
