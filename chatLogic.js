@@ -43,7 +43,7 @@ function getProfileData(sender){
 }
 
 function saveLanguage(sender, language){
-  console.log("updating language", sender, language);
+  console.log("updating language ${sender} ${language}");
   citizens.update({facebook_id: sender}, {$set: {language}});
 }
 
@@ -153,7 +153,6 @@ function askLogin(sender){
 }
 
 function handleMessengerWebHookCall(event, sender){
-  console.log(`Sender: ${sender}`);
   if (event.postback) {
     const { payload, title } = event.postback;
     switch(payload) {
@@ -162,6 +161,7 @@ function handleMessengerWebHookCall(event, sender){
         chooseLanguageMessage(sender);
         break;
       case 'language':
+        console.log("before updating language ${sender} ${language}");
         saveLanguage(sender, title);
         chooseCountryMessage(sender);
         break;
