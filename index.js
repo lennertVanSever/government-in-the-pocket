@@ -15,11 +15,9 @@ app.set('port', (process.env.PORT || 5000));
 const whitelist = ['http://localhost:3000', 'https://government-client.herokuapp.com', undefined];
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
         callback(null, true)
     } else {
-        console.log(origin);
         callback(new Error('Not allowed by CORS'))
     }
   }
@@ -53,15 +51,16 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
-    let messaging_events = req.body.entry[0].messaging;
-    if(messaging_events){
-	    for (let i = 0; i < messaging_events.length; i++) {
-	      let event = req.body.entry[0].messaging[i]
-	      let sender = event.sender.id;
-	      chatLogic.main(event, sender);
-	    }
+  console.log(req.toString());
+  let messaging_events = req.body.entry[0].messaging;
+  if(messaging_events){
+    for (let i = 0; i < messaging_events.length; i++) {
+      let event = req.body.entry[0].messaging[i];
+      let sender = event.sender.id;
+      chatLogic.main(event, sender);
     }
-    res.sendStatus(200)
+  }
+  res.sendStatus(200)
 });
 
 require('./browserActions.js')(app);
