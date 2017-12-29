@@ -161,7 +161,7 @@ function handleMessengerWebHookCall(event, sender){
         chooseLanguageMessage(sender);
         break;
       case 'language':
-        console.log(`before updating language ${sender} ${language}`);
+        console.log(`before updating language ${sender} ${title}`);
         saveLanguage(sender, title);
         chooseCountryMessage(sender);
         break;
