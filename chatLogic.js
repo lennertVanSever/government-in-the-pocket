@@ -150,7 +150,7 @@ function askLogin(sender){
 
 module.exports = {
 	main(event, sender){
-    console.log(sender);
+    console.log(`Sender: ${sender}`);
 		if (event.postback) {
 			const { payload, title } = event.postback;
 			switch(payload) {
