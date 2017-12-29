@@ -32,7 +32,6 @@ function sendMessageDataToSender(sender, messageData){
 }
 
 function getProfileData(sender){
-	console.log(sender);
 	axios.get(`https://graph.facebook.com/v2.6/${sender}?fields=first_name,last_name,profile_pic&access_token=${facebookPageToken}`).then(response => {
 		const {first_name, last_name, profile_pic, id} = response.data;
 		citizens.find({facebook_id: id}).then(citizenData => {
@@ -181,5 +180,3 @@ module.exports = {
 	    }
 	}
 }
-
-

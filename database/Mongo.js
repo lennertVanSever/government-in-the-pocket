@@ -17,9 +17,10 @@ database.connection
 
 const citizensSchema = database.Schema({
 	first_name: String,
-	last_name: String, 
-	profile_pic: String, 
+	last_name: String,
+	profile_pic: String,
 	facebook_id: Number,
+  registration_number: Number,
 	language: ObjectId,
 	government: ObjectId
 }, { collection: 'citizens' });
