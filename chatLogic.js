@@ -150,11 +150,12 @@ function askLogin(sender){
 
 module.exports = {
 	main(event, sender){
+    console.log(sender);
 		if (event.postback) {
 			const { payload, title } = event.postback;
 			switch(payload) {
 			    case 'USER_DEFINED_PAYLOAD':
-			    	getProfileData(sender);
+			    	  getProfileData(sender);
 			        chooseLanguageMessage(sender);
 			        break;
 			    case 'language':
