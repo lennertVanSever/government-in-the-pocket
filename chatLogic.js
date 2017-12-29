@@ -19,7 +19,7 @@ function sendMessageDataToSender(sender, messageData){
 	    qs,
 	    method: 'POST',
 		json: {
-		    recipient: {id:sender},
+		  recipient: {id:sender},
 			message: messageData,
 		}
 	}, function(error, response, body) {
@@ -146,36 +146,57 @@ function askLogin(sender){
 	sendMessageDataToSender(sender, messageData);
 }
 
-module.exports = {
-	main(event, sender){
-    console.log(`Sender: ${sender}`);
-		if (event.postback) {
-			const { payload, title } = event.postback;
-			switch(payload) {
-			    case 'USER_DEFINED_PAYLOAD':
-			    	  getProfileData(sender);
-			        chooseLanguageMessage(sender);
-			        break;
-			    case 'language':
-			        chooseCountryMessage(sender);
-			        break;
-			   	case 'country':
-			        askInfoOrAction(sender);
-			        break;
-			    case 'typeOfAction':
-			    	if(title === "adminstratieve taak"){
-			    		askLogin(sender);
-			    	}
-			    	else if(title === "info"){
-			    		sendTextMessage(sender, "Tip gewoon je vraag in en ik (🤖) zal proberen te helpen.")
-			    	}
-			        break;
-			    default:
-			        console.log("payload not found", payload);
-			}
-		}
-		if (event.message && event.message.text) {
-	  	    sendTextMessage(sender, "message received");
-	    }
-	}
+function handleMessengerWebHookCall(event, sender){
+  console.log(`Sender: ${sender}`);
+  if (event.postback) {
+    const { payload, title } = event.postback;
+    switch(payload) {
+        case 'USER_DEFINED_PAYLOAD':
+            getProfileData(sender);
+            chooseLanguageMessage(sender);
+            break;
+        case 'language':
+            chooseCountryMessage(sender);
+            break;
+        case 'country':
+            askInfoOrAction(sender);
+            break;
+        case 'typeOfAction':
+          if(title === "adminstratieve taak"){
+            askLogin(sender);
+          }
+          else if(title === "info"){
+            sendTextMessage(sender, "Tip gewoon je vraag in en ik (🤖) zal proberen te helpen.")
+          }
+            break;
+        default:
+            console.log("payload not found", payload);
+    }
+  }
+  if (event.message && event.message.text) {
+        sendTextMessage(sender, "message received");
+    }
+}
+
+module.exports = function (app) {
+  // for Facebook verification
+  app.get('/webhook/', function (req, res) {
+  	if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
+  		res.send(req.query['hub.challenge'])
+  	}
+  	res.send('Error, wrong token')
+  })
+
+  app.post('/webhook/', function (req, res) {
+    console.log(req.toString());
+    let messaging_events = req.body.entry[0].messaging;
+    if(messaging_events){
+      for (let i = 0; i < messaging_events.length; i++) {
+        let event = req.body.entry[0].messaging[i];
+        let sender = event.sender.id;
+        handleMessengerWebHookCall(event, sender);
+      }
+    }
+    res.sendStatus(200)
+  });
 }

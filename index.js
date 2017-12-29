@@ -3,9 +3,6 @@ import bodyParser from 'body-parser';
 import request from 'request';
 import cors from 'cors';
 
-import chatLogic from './chatLogic';
-
-
 const app = express();
 
 let facebookPageToken = process.env.facebookPageToken;
@@ -42,25 +39,5 @@ app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
 
-// for Facebook verification
-app.get('/webhook/', function (req, res) {
-	if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
-		res.send(req.query['hub.challenge'])
-	}
-	res.send('Error, wrong token')
-})
-
-app.post('/webhook/', function (req, res) {
-  console.log(req.toString());
-  let messaging_events = req.body.entry[0].messaging;
-  if(messaging_events){
-    for (let i = 0; i < messaging_events.length; i++) {
-      let event = req.body.entry[0].messaging[i];
-      let sender = event.sender.id;
-      chatLogic.main(event, sender);
-    }
-  }
-  res.sendStatus(200)
-});
-
+require('./chatLogic.js')(app);
 require('./browserActions.js')(app);
