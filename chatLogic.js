@@ -43,7 +43,7 @@ function getProfileData(sender){
 }
 
 function saveLanguage(sender, language){
-  citizens.update({facebook_id: sender}, {language});
+  citizens.update({facebook_id: sender}, {"language": language});
 }
 
 function chooseLanguageMessage(sender){
