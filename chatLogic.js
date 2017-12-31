@@ -42,9 +42,10 @@ function getProfileData(sender){
   });
 }
 
-function saveLanguage(sender, language){
-  console.log(`updating language ${sender} ${language}`);
-  citizens.update({facebook_id: Number(sender)}, {$set: {"language": language}});
+function saveLanguage(sender, value){
+  console.log(`updating language ${typeof sender} ${language}`);
+
+  citizens.update({facebook_id: Number(sender)}, {$set: {language: value}});
 }
 
 function chooseLanguageMessage(sender){
