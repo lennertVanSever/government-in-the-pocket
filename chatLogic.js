@@ -43,7 +43,7 @@ function getProfileData(sender){
 }
 
 function saveLanguage(sender, value){
-  console.log(`updating language ${typeof sender} ${language}`);
+  console.log(`updating language ${typeof sender} ${value}`);
 
   citizens.update({facebook_id: Number(sender)}, {$set: {language: value}});
 }
